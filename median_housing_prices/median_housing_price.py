@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 import os
 import pandas as pd
 import tarfile
@@ -25,6 +26,15 @@ def load_housing_data(housing_path=HOUSING_PATH):
     return pd.read_csv(csv_path)
 
 
+def split_train_test(data, test_ratio=0.2):
+    # shuffling the indices.
+    shuffled_indices = np.random.permutation(len(data))
+    test_set_size = int(len(data) * test_ratio)
+    test_indices = shuffled_indices[:test_set_size]
+    train_indices = shuffled_indices[test_set_size:]
+    return data.iloc[train_indices], data.iloc[test_indices]
+
+
 if __name__ == '__main__':
     fetch_housing_data()
     housing = load_housing_data()
@@ -35,3 +45,9 @@ if __name__ == '__main__':
     housing_describe = housing.describe()
     housing.hist(bins=50, figsize=(20, 15))
     plt.show()
+
+    train_set, test_set = split_train_test(housing, 0.2)
+
+
+
+
