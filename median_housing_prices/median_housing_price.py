@@ -77,6 +77,12 @@ for train_index, test_index in split.split(housing, housing['income_cat']):
 strat_test_set['income_cat'].value_counts()/len(strat_test_set)
 housing['income_cat'].value_counts()/len(housing)
 
+# creating a deep copy
+housing = strat_train_set.copy()
+
+# visualization
+
+
 
 
 
