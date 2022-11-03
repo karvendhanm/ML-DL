@@ -1,3 +1,6 @@
 .idea/
 median_housing_prices/temp.py
 git_access_token
+.ipynb_checkpoints/
+GPUbound/.ipynb_checkpoints/
+temp.py
