@@ -4,3 +4,4 @@ git_access_token
 .ipynb_checkpoints/
 GPUbound/.ipynb_checkpoints/
 temp.py
+median_housing_prices/__pycache__/
