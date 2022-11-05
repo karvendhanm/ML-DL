@@ -1,0 +1,2 @@
+from median_housing_prices.config import DOWNLOAD_ROOT, HOUSING_DATA_LOCAL_PATH, HOUSING_DATA_WEB_URL
+

@@ -2,13 +2,11 @@ import os
 import tarfile
 import urllib
 
-DOWNLOAD_ROOT = 'https://raw.githubusercontent.com/ageron/handson-ml2/master/'
-HOUSING_DATA_LOCAL_PATH = os.path.join('datasets', 'housing')
-HOUSING_DATA_WEB_URL = DOWNLOAD_ROOT + HOUSING_DATA_LOCAL_PATH + '/housing.tgz'
+from median_housing_prices import *
 
 
-def fetch_housing_data(housing_data_web_url=HOUSING_DATA_WEB_URL,
-                       housing_data_local_path=HOUSING_DATA_LOCAL_PATH):
+def fetch_housing_data(housing_data_web_url=config.HOUSING_DATA_WEB_URL,
+                       housing_data_local_path=config.HOUSING_DATA_LOCAL_PATH):
     '''
 
     :param housing_data_web_url:
