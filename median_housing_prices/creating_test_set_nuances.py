@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from sklearn.model_selection import train_test_split
 from zlib import crc32
 
 from median_housing_prices import load_housing_data
@@ -33,7 +34,30 @@ def test_set_check(identifier, test_ratio):
     return crc32(np.int64(identifier)) & 0xffffffff < test_ratio * 2**32
 
 
+def split_train_test_by_id(data, test_ratio, id_column):
+    '''
+
+    :param data:
+    :param test_ratio:
+    :param id_column:
+    :return:
+    '''
+    ids = data[id_column]
+    in_test_set = ids.apply(lambda id_: test_set_check(id_, test_ratio))
+    return data.loc[~in_test_set], data.loc[in_test_set]
+
+
 if __name__ == '__main__':
     df_housing = load_housing_data()
     df_train, df_test = split_train_test(df_housing, 0.2)
-    print('this is just for debugging')
+
+    # using row index as unique identifier.
+    housing_with_id = df_housing.reset_index()
+    train_set, test_set = split_train_test_by_id(housing_with_id, 0.2, 'index')
+
+    # this doesn't seem to be working well.
+    housing_with_id['id'] = housing_with_id[['longitude', 'latitude']].apply(lambda x: (x[0]*1000) + x[1], axis=1)
+    train_set, test_set = split_train_test_by_id(housing_with_id, 0.2, 'id')
+
+    # using scikit learn libraries
+    train_set, test_set = train_test_split(df_housing, test_size=0.2, random_state=42)
