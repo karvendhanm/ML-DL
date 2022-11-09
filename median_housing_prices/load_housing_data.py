@@ -62,7 +62,14 @@ if __name__ == '__main__':
 
     for set_ in (strat_test_set, strat_train_set):
         set_.drop('income_cat', inplace=True, axis=1)
+
+    # From hereon we will work only on the training set and set the test set aside
+    housing = strat_train_set.copy()
+    housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1)
+
     print('this is just for debugging')
+
+
 
 
 
