@@ -65,10 +65,15 @@ if __name__ == '__main__':
 
     # From hereon we will work only on the training set and set the test set aside
     housing = strat_train_set.copy()
-    housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1)
+    # housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1)
+
+    # playing around with the visualization parameters to make the patterns stand out.
+    _ = plt.set_cmap('jet')
+    housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1
+                 , s=housing['population']/100, c='median_house_value', figsize=(10,7)
+                 , label='population', colorbar=True)
 
     print('this is just for debugging')
-
 
 
 
