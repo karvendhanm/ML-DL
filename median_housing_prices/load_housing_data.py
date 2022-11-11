@@ -19,7 +19,7 @@ def load_housing_data(housing_path=HOUSING_DATA_LOCAL_PATH):
 
 
 def random_sampling_using_hashing(identifier, test_size):
-    return crc32(np.int64(identifier)) & 0xffffffff < test_size * 2**32
+    return crc32(np.int64(identifier)) & 0xffffffff < test_size * 2 ** 32
 
 
 if __name__ == '__main__':
@@ -68,14 +68,12 @@ if __name__ == '__main__':
     # housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1)
 
     # playing around with the visualization parameters to make the patterns stand out.
-    _ = plt.set_cmap('jet')
+    plt.set_cmap('jet')
     housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1
-                 , s=housing['population']/100, c='median_house_value', figsize=(10,7)
+                 , s=housing['population'] / 100, c='median_house_value', figsize=(10, 7)
                  , label='population', colorbar=True)
 
+    # compute the standard/pearson's correlation coefficient
+    corr_matrix = housing.corr()
+
     print('this is just for debugging')
-
-
-
-
-
