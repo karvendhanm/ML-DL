@@ -31,15 +31,15 @@ if __name__ == '__main__':
     df_housing.describe()
 
     # drawing histogram of all variable
-    # df_housing.hist(bins=50, figsize=(20, 15))
-    # plt.show()
+    df_housing.hist(bins=50, figsize=(20, 15))
+    plt.show()
 
     # making a categorical variable out of the median income column
     df_housing['income_cat'] = pd.cut(df_housing['median_income'],
                                       bins=[0., 1.5, 3.0, 4.5, 6.0, np.inf],
                                       labels=[1, 2, 3, 4, 5])
 
-    # df_housing['income_cat'].hist()
+    df_housing['income_cat'].hist()
 
     # since median income has been converted to a categorical variable, we can use
     # stratified sampling
@@ -66,13 +66,13 @@ if __name__ == '__main__':
 
     # From hereon we will work only on the training set and set the test set aside
     housing = strat_train_set.copy()
-    # housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1)
+    housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1)
 
     # playing around with the visualization parameters to make the patterns stand out.
-    # plt.set_cmap('jet')
-    # housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1
-    #              , s=housing['population'] / 100, c='median_house_value', figsize=(10, 7)
-    #              , label='population', colorbar=True)
+    plt.set_cmap('jet')
+    housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1
+                 , s=housing['population'] / 100, c='median_house_value', figsize=(10, 7)
+                 , label='population', colorbar=True)
 
     # compute the standard/pearson's correlation coefficient
     corr_matrix = housing.corr()
@@ -81,7 +81,5 @@ if __name__ == '__main__':
     # scatter matrix
     attributes = ['median_house_value', 'median_income', 'total_rooms', 'housing_median_age']
     scatter_matrix(housing[attributes], figsize=(12, 8))
-
     housing.plot(kind='scatter', x='median_income', y='median_house_value', alpha=0.1)
 
-    print('this is just for debugging')
