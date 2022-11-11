@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import pandas as pd
+from pandas.plotting import scatter_matrix
 from sklearn.model_selection import StratifiedShuffleSplit
 from zlib import crc32
 
@@ -68,12 +69,19 @@ if __name__ == '__main__':
     # housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1)
 
     # playing around with the visualization parameters to make the patterns stand out.
-    plt.set_cmap('jet')
-    housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1
-                 , s=housing['population'] / 100, c='median_house_value', figsize=(10, 7)
-                 , label='population', colorbar=True)
+    # plt.set_cmap('jet')
+    # housing.plot(kind='scatter', x='longitude', y='latitude', alpha=0.1
+    #              , s=housing['population'] / 100, c='median_house_value', figsize=(10, 7)
+    #              , label='population', colorbar=True)
 
     # compute the standard/pearson's correlation coefficient
     corr_matrix = housing.corr()
+    print(corr_matrix['median_house_value'].sort_values(ascending=False))
+
+    # scatter matrix
+    attributes = ['median_house_value', 'median_income', 'total_rooms', 'housing_median_age']
+    scatter_matrix(housing[attributes], figsize=(12, 8))
+
+    housing.plot(kind='scatter', x='median_income', y='median_house_value', alpha=0.1)
 
     print('this is just for debugging')
