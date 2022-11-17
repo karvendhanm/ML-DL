@@ -10,14 +10,14 @@ from median_housing_prices import HOUSING_DATA_LOCAL_PATH
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.impute import SimpleImputer
 from sklearn.model_selection import StratifiedShuffleSplit
-from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder, StandardScaler
 
 
 def load_housing_data(housing_path=HOUSING_DATA_LOCAL_PATH):
     '''
 
-    :param housing_path:
-    :return:
+    :param housing_path:    :return:
     '''
     csv_path = os.path.join(housing_path, 'housing.csv')
     return pd.read_csv(csv_path)
@@ -124,4 +124,12 @@ if __name__ == '__main__':
     attr_adder = CombinedAttributesAdder(add_bedrooms_per_room=False)
     housing_extra_attribs = attr_adder.transform(housing.values)
 
+    # feature scaling & transformation pipelines
+    num_pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='median')),
+        ('attribs_adder', CombinedAttributesAdder()),
+        ('std_scaler', StandardScaler()),
+    ])
+
+    housing_tr = num_pipeline.fit_transform(housing_num)
     print('this is just for debugging')
