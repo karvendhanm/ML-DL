@@ -8,6 +8,7 @@ import pandas as pd
 
 from median_housing_prices import HOUSING_DATA_LOCAL_PATH
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.pipeline import Pipeline
@@ -130,6 +131,18 @@ if __name__ == '__main__':
         ('attribs_adder', CombinedAttributesAdder()),
         ('std_scaler', StandardScaler()),
     ])
-
     housing_tr = num_pipeline.fit_transform(housing_num)
+
+    num_attribs = list(housing_num)
+    cat_attribs = ['ocean_proximity']
+
+
+    full_pipeline = ColumnTransformer(
+        [
+            ('num', num_pipeline, num_attribs),
+            ('cat', OneHotEncoder(), cat_attribs)
+        ]
+    )
+
+    housing_prepared = full_pipeline.fit_transform(housing)
     print('this is just for debugging')
