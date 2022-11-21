@@ -10,6 +10,7 @@ from median_housing_prices import HOUSING_DATA_LOCAL_PATH
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
+from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder, StandardScaler
@@ -145,4 +146,11 @@ if __name__ == '__main__':
     )
 
     housing_prepared = full_pipeline.fit_transform(housing)
+
+    # select and train the model
+    # training using regression model
+    lin_reg = LinearRegression()
+    lin_reg.fit(housing_prepared, housing_labels)
+
+
     print('this is just for debugging')
