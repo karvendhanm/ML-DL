@@ -5,6 +5,7 @@ from timeit import default_timer as timer
 
 
 # normal function to run on cpu
+@jit(target_backend='cuda')
 def func(a):
     for i in range(10000000):
         a[i] += 1
@@ -12,7 +13,7 @@ def func(a):
     # function optimized to run on gpu
 
 
-@jit(target_backend='cuda')
+@jit(target_backend='cpu')
 def func2(a):
     for i in range(10000000):
         a[i] += 1

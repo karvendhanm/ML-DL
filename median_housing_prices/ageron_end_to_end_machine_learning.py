@@ -31,3 +31,12 @@ def load_housing_data():
 if __name__ == '__main__':
     housing = load_housing_data()
 
+    # taking a quick look at the data structure
+    print(housing.head())
+    print(housing.info())
+    print(housing['ocean_proximity'].value_counts())
+    print(housing.describe())
+
+
+    print('')
+
