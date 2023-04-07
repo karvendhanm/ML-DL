@@ -32,7 +32,7 @@ def micro_precision(y_true, y_pred):
 y_true = [0, 1, 2, 0, 1, 2, 0, 2, 2]
 y_pred = [0, 2, 1, 0, 2, 1, 0, 0, 2]
 
-_macro_precision = micro_precision(y_true, y_pred)
-print(f'the macro precision in the implemented function is: {_macro_precision}')
-print(f'the macro precision in the sklearn implemented function is: '
+_micro_precision = micro_precision(y_true, y_pred)
+print(f'the micro precision in the implemented function is: {_macro_precision}')
+print(f'the micro precision in the sklearn implemented function is: '
       f'{metrics.precision_score(y_true, y_pred, average="micro")}')
