@@ -15,5 +15,12 @@ df['ord_2'].unique()
 df.loc[:, 'ord_2_transform'] = df.groupby('ord_2')['id'].transform('count')
 df['ord_2_transform'].unique()
 
+#it is even possible to combine 2 columns and use their counts
+df['ord_1'].fillna('NONE', inplace=True)
+df['ord_1'].unique()
+
+df.columns
+
+df.groupby(['ord_1', 'ord_2'])['id'].count().reset_index(name='count')
 
 

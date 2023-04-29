@@ -44,3 +44,63 @@ def average_precision_at_k(y_true, y_pred, k):
         return 0
 
     return sum(_precision_at_k_values)/len(_precision_at_k_values)
+
+
+def mean_average_precision_at_k(y_true, y_pred, k):
+    '''
+    mean average precision at k (MAP@k) is calculated by calulating the average of average precision at k
+    for all the samples
+
+    :param y_true:
+    :param y_pred:
+    :param k:
+    :return:
+    '''
+
+    mean_average_precision_values = []
+    for i in range(len(y_true)):
+        mean_average_precision_values.append(average_precision_at_k(y_true[i], y_pred[i], k))
+
+    if not len(mean_average_precision_values):
+        return 0
+
+    return sum(mean_average_precision_values)/len(mean_average_precision_values)
+
+
+y_true = [
+    [1, 2, 3],
+    [0, 2],
+    [1],
+    [2, 3],
+    [1, 0],
+    []
+]
+
+y_pred = [
+    [0, 1, 2],
+    [1],
+    [0, 2, 3],
+    [2, 3, 4, 0],
+    [0, 1, 2],
+    [0]
+]
+
+for i in range(len(y_true)):
+    for j in range(1, 4):
+
+        print(f'''
+            y_true = {y_true[i]},
+            y_pred = {y_pred[i]},
+            AP@{j} = {average_precision_at_k(y_true[i], y_pred[i], j)}                
+        ''')
+
+mean_average_precision_at_k(y_true, y_pred, 1)
+mean_average_precision_at_k(y_true, y_pred, 2)
+mean_average_precision_at_k(y_true, y_pred, 3)
+mean_average_precision_at_k(y_true, y_pred, 4)
+2
+
+
+
+
+
