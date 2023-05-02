@@ -18,7 +18,7 @@ def run(fold_):
 
     df = pd.read_csv('./data/adult_folds.csv')
 
-    # Even as it looks liek there is no missing values,
+    # Even as it looks like there is no missing values,
     # All the missing values have been subsituted with '?'.
     # replacing '?' with 'NONE'.
     for col in df.columns:

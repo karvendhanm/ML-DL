@@ -57,8 +57,8 @@ def run(fold_):
             df.loc[:, col] = lbl.transform(df[col])
 
     # splitting training and validation data based on kfolds.
-    df_train = df.loc[df['kfold'] != fold_, :]
-    df_valid = df.loc[df['kfold'] == fold_, :]
+    df_train = df.loc[df['kfold'] != fold_, :].reset_index(drop=True)
+    df_valid = df.loc[df['kfold'] == fold_, :].reset_index(drop=True)
 
     model = xgb.XGBClassifier(n_jobs = -1)
     model.fit(df_train[features].values, df_train.target.values)
