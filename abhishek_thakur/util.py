@@ -132,3 +132,29 @@ def get_false_positive_rate(y_true, y_pred):
 
     return 1 - get_true_negative_rate(y_true, y_pred)
 
+def generate_features(data):
+    """
+
+    param data:
+    return:
+    """
+    # create a bunch of features using the date column in the input.
+    data.loc[:, 'year'] = data['date'].dt.year
+    data.loc[:, 'weekofyear'] = data['date'].dt.isocalendar().week
+    data.loc[:, 'month'] = data['date'].dt.month
+    data.loc[:, 'dayofweek'] = data['date'].dt.dayofweek
+    data.loc[:, 'weekend'] = (data['date'].dt.weekday>=5).astype(int)
+
+    # create an aggregate dictionary
+    aggs = {
+        'month': ['nunique', 'mean'],
+        'weekofyear': ['nunique', 'mean'],
+        'num1': ['sum', 'max', 'min', 'mean'],
+        'customer_id': ['count', 'nunique']
+    }
+
+    agg_df = data.groupby('customer_id').agg(aggs)
+    agg_df = agg_df.reset_index()
+
+    return agg_df
+
