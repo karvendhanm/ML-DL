@@ -146,14 +146,14 @@ def generate_features(data):
     data.loc[:, 'weekend'] = (data['date'].dt.weekday>=5).astype(int)
 
     # create an aggregate dictionary
-    aggs = {
+    dict_ = {
         'month': ['nunique', 'mean'],
         'weekofyear': ['nunique', 'mean'],
         'num1': ['sum', 'max', 'min', 'mean'],
         'customer_id': ['count', 'nunique']
     }
 
-    agg_df = data.groupby('customer_id').agg(aggs)
+    agg_df = data.groupby('customer_id').agg(dict_)
     agg_df = agg_df.reset_index()
 
     return agg_df
