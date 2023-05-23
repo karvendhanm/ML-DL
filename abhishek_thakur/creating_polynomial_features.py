@@ -14,4 +14,4 @@ poly_feats = pf.fit_transform(df)
 # number of columns in the dataframe
 num_feats = poly_feats.shape[1]
 
-df_transfomed = pd.DataFrame(poly_feats, columns=[f"f_{i}" for i in range(1, num_feats + 1)])
+df_transformed = pd.DataFrame(poly_feats, columns=[f"f_{i}" for i in range(1, num_feats + 1)])
