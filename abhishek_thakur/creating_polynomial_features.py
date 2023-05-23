@@ -13,5 +13,8 @@ poly_feats = pf.fit_transform(df)
 
 # number of columns in the dataframe
 num_feats = poly_feats.shape[1]
-
 df_transformed = pd.DataFrame(poly_feats, columns=[f"f_{i}" for i in range(1, num_feats + 1)])
+
+# binning - converting numerical features to categorical
+df['f_bin_10'] = pd.cut(df['f_1'], bins=10, labels=False)
+df['f_bin_100'] = pd.cut(df['f_1'], bins=100, labels=False)
