@@ -7,7 +7,7 @@ iris = load_iris()
 X = iris['data'][:, 2:]  # petal length and petal width
 y = iris.target
 
-tree_clf = DecisionTreeClassifier(max_depth=3)
+tree_clf = DecisionTreeClassifier(max_depth=2)
 tree_clf.fit(X, y)
 
 # Generate the graphviz representation of the decision tree
@@ -23,6 +23,10 @@ dot_data = export_graphviz(
 
 graph = graphviz.Source(dot_data)
 graph.view()
+
+# predict proba and predict.
+tree_clf.predict_proba([[6, 1.5]])
+tree_clf.predict([[6, 1.5]])
 
 
 
